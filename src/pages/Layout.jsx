@@ -1,23 +1,14 @@
 import { Outlet, Link } from "react-router-dom";
 
+import NavbarCmp from "../components/NavbarCmp";
+
 const Layout = () => {
   return (
     <>
-      <nav>
-        <ul>
-          <li>
-            <Link to="/login">login</Link>
-          </li>
-          <li>
-            <Link to="/members">Members</Link>
-          </li>
-          <li>
-            <Link to="/files">Files</Link>
-          </li>
-        </ul>
-      </nav>
-
-      <Outlet />
+        <div className="flex h-[100vh] w-[100%]">
+            <NavbarCmp />
+            <Outlet />
+        </div>
     </>
   )
 };

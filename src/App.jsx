@@ -7,8 +7,13 @@ import FilesPage from './pages/FilesPage';
 import LoginPage from './pages/LoginPage';
 import MembersPage from './pages/MembersPage';
 import NotFoundPage from './pages/NotFoundPage';
-import SpacePage from './pages/SpacesPage';
+import SpacesPage from './pages/SpacesPage';
 import TicketsPage from './pages/TicketsPage';
+import DashboardPage from './pages/DashboardPage';
+import CalendarPage from './pages/CalendarPage';
+import FinancesPage from './pages/FinancesPage';
+import MessageCenterPage from './pages/MessageCenterPage';
+import SettingsPage from './pages/SettingsPage';
 
 import './App.css'
 
@@ -21,9 +26,14 @@ function App() {
           <Route path="/" element={<Layout />}>
             <Route index element={<LoginPage />} />
             <Route path="announcements" element={<AnnouncementsPage />} />
+            <Route path="calendar" element={<CalendarPage />} />
+            <Route path="dashboard" element={<DashboardPage />} />
             <Route path="files" element={<FilesPage />} />
+            <Route path="finances" element={<FinancesPage />} />
             <Route path="members" element={<MembersPage />} />
-            <Route path="spaces" element={<SpacePage />} />
+            <Route path="message center" element={<MessageCenterPage />} />
+            <Route path="settings" element={<SettingsPage />} />
+            <Route path="spaces" element={<SpacesPage />} />
             <Route path="tickets" element={<TicketsPage />} />
             <Route path="*" element={<NotFoundPage />} />
           </Route>

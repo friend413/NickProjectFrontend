@@ -6,7 +6,7 @@ const Page = () => {
     return (
         <>
             <div className="w-[100%] relative">
-                <HeadbarCmp title='Tickets'/>
+                <HeadbarCmp title='Settings'/>
                 <div className="py-[104px] px-[32px] pb-[57px] bg-[#F5F5F5] h-[100vh] overflow-y-auto">
                 </div>
             </div>
