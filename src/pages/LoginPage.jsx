@@ -1,8 +1,50 @@
+import axios from "axios";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
+import { setUserInfo } from "../utilis/redux/mainReducer";
+
 import backimg from "../assets/background.png";
 import logo from "../assets/logo.svg"
 
-const Page = () => {
 
+const Page = () => {
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
+
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [hint, setHint] = useState('')
+    const reduxStore = useSelector((state) => state.main)
+
+    const onSubmit = (e) => {
+        e.preventDefault();
+        const emailRegExp = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if( emailRegExp.test(email) == false ){
+            setHint('Wrong email style.')
+            return ;
+        }
+        if( password.length == 0 ){
+            setHint('You must input your password');
+            return ;
+        }
+        setHint('')
+        axios.post(import.meta.env.VITE_API_URL+'/users/login', {email, password})
+            .then(res => {
+                setHint(res.data.msg)
+                if( res.data.type == 'success' ){
+                    console.log('rec',res.data.data)
+                    dispatch(setUserInfo(res.data.data))
+                    navigate('/dashboard')
+                }
+                else 
+                    navigate('/')
+            })
+            .catch(err=>{
+                console.log(err);
+            })
+    }
     return (
         <>
             <div className={`w-[100%] h-[100vh] bg-[#1F2937] relative`}>
@@ -18,22 +60,22 @@ const Page = () => {
                             <div className="inputField flex flex-col justify-between h-[76px]">
                                 <h3 className="block font-[Inter] text-[14px] font-medium leading-[24px] text-[#344054]">Email Address</h3>
                                 <div className="inputGroup">
-                                    <input placeholder="olivia@gmail.com" className="w-[100%] py-[10px] px-[12px] rounded-[12px] border-solid border border-[#D0D5DD] outline-0"></input>
+                                    <input placeholder="olivia@gmail.com" value={email} onChange={(e)=>setEmail(e.target.value)} className="w-[100%] py-[10px] px-[12px] rounded-[12px] border-solid border border-[#D0D5DD] outline-0"></input>
                                 </div>
                             </div>
                             <div className="inputField flex flex-col justify-between gap-y-[6px]">
                                 <h3 className="block font-[Inter] text-[14px] font-medium leading-[24px] text-[#344054]">Password</h3>
                                 <div className="inputGroup">
-                                    <input placeholder="password" type="password" className="w-[100%] py-[10px] px-[12px] rounded-[12px] border-solid border border-[#D0D5DD] outline-0"></input>
+                                    <input placeholder="password" type="password" value={password} onChange={(e)=>setPassword(e.target.value)} className="w-[100%] py-[10px] px-[12px] rounded-[12px] border-solid border border-[#D0D5DD] outline-0"></input>
                                 </div>
-                                <h3 className="block font-[Inter] text-[14px] font-medium leading-[24px] text-[#475467]">Wrong email or password.</h3>
+                                { hint.length != 0 && <h3 className="block font-[Inter] text-[14px] font-medium leading-[24px] text-[#475467]">{hint}</h3> }
                             </div>
                             <div className="inputField flex gap-x-[12px]">
                                 <input type="checkbox" className="w-[24px] h-[24px] rounded-[8px] border-solid border border-[#D0D5DD] outline-0"></input>
                                 <h3 className="block font-[Inter] text-[14px] font-medium leading-[24px] text-[#344054]">Remember Me</h3>
                             </div>
                         </div>
-                        <button className="w-[100%] py-[18px] px-[24px] bg-[#6366F1] text-white shadow-md font-[Inter] rounded-[12px]">Login</button>
+                        <button className="w-[100%] py-[18px] px-[24px] bg-[#6366F1] text-white shadow-md font-[Inter] rounded-[12px]" onClick={(e) => onSubmit(e)}>Login</button>
                     </form>
                 </div>
             </div>

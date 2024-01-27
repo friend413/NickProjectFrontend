@@ -1,5 +1,6 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import dotenv from 'dotenv';
 
 import Layout from './pages/Layout';
 import AnnouncementsPage from './pages/AnnouncementsPage';
@@ -18,7 +19,7 @@ import SettingsPage from './pages/SettingsPage';
 import './App.css'
 
 function App() {
-
+  
   return (
     <>
       <BrowserRouter>

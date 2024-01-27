@@ -7,6 +7,11 @@ import upArrow from "../assets/upArrow.svg";
 
 const Page = () => {
     const [bodyHeight, setBodyHeight] = useState(100);
+    const [modalVisible, setModalVisible] = useState(false)
+
+    const onAddMember = () => {
+        setModalVisible( !modalVisible )
+    }
     return (
         <>
             <div className="w-[100%] relative">
@@ -21,9 +26,9 @@ const Page = () => {
                                     <img className="w-[20px] h-[20px]" src={filters} />
                                     <h3 className="block font-[Inter] text-[14px] font-semibold leading-[24px] text-[#344054]">Filters</h3>
                                 </button>
-                                <button className="py-[12px] px-[16px] bg-white border border-solid border-[#6366F1] bg-[#6366F1] rounded-[12px] flex items-center gap-x-[8px]">
+                                <button className="py-[12px] px-[16px] border border-solid border-[#6366F1] bg-[#6366F1] rounded-[12px] flex items-center gap-x-[8px]">
                                     <img className="w-[20px] h-[20px]" src={plus} />
-                                    <h3 className="block font-[Inter] text-[14px] font-semibold leading-[16px] text-white">Add member</h3>
+                                    <h3 className="block font-[Inter] text-[14px] font-semibold leading-[16px] text-white" onClick={onAddMember}>Add member</h3>
                                 </button>
                             </div>
                         </div>
@@ -287,6 +292,7 @@ const Page = () => {
                     </div>
                 </div>
             </div>
+            <div className=""></div>
         </>
     )
 }
