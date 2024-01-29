@@ -1,5 +1,8 @@
 import { Link } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+import { setCategory } from "../utilis/redux/mainReducer";
+import { useDispatch } from "react-redux";
 
 import logo from '../assets/logo.svg';
 import reactsvg from '../assets/react.svg';
@@ -18,7 +21,12 @@ import menuicon9 from '../assets/menuicon9.svg';
 
 const NavbarCmp = () => {
 
+    const category = useSelector((state) => state.main.category)
+    const dispatch = useDispatch();
     const [menuList, setMenuList] = useState(['Dashboard', 'Members', 'Spaces', 'Message Center', 'Tickets', 'Calendar', 'Files', 'Finances', 'Settings']);
+    const menuIconList = [
+        menuicon1, menuicon2, menuicon3, menuicon4, menuicon5, menuicon6, menuicon7, menuicon8, menuicon9,
+    ]
 
     return (
         <>
@@ -40,7 +48,15 @@ const NavbarCmp = () => {
                         </div>
                     </div>
                     <ul className="flex flex-col gap-y-[8px]">
-                        <li className="py-[12px] px-[16px] flex items-center gap-x-[12px]">
+                        {
+                            menuList.map((item, index) => 
+                                <li key={index} className={`py-[12px] px-[16px] flex items-center gap-x-[12px] rounded-[12px] ${category == menuList[index] ? " bg-[#6366F1]" : ""}`} >
+                                    <img className="w-[24px] h-[24px]" src={menuIconList[index]} />
+                                    <h3 className="block leading-[24px] text-[14px] font-[Inter] font-semibold text-gray-400" onClick={()=>dispatch(setCategory(menuList[index]))}><Link to={`/${menuList[index].toLowerCase()}`}>{menuList[index]}</Link></h3>
+                                </li>
+                            )
+                        }
+                        {/* <li className="py-[12px] px-[16px] flex items-center gap-x-[12px]">
                             <img className="w-[24px] h-[24px]" src={menuicon1} />
                             <h3 className="block leading-[24px] text-[14px] font-[Inter] font-semibold text-gray-400"><Link to={`/${menuList[0].toLowerCase()}`}>{menuList[0]}</Link></h3>
                         </li>
@@ -75,15 +91,7 @@ const NavbarCmp = () => {
                         <li className="py-[12px] px-[16px] flex items-center gap-x-[12px]">
                             <img className="w-[24px] h-[24px]" src={menuicon9} />
                             <h3 className="block leading-[24px] text-[14px] font-[Inter] font-semibold text-gray-400"><Link to={`/${menuList[8].toLowerCase()}`}>{menuList[8]}</Link></h3>
-                        </li>
-                        {/* {
-                            menuList.map((item, index) => <li key={index} className="py-[12px] px-[16px] flex items-center gap-x-[12px]">
-                                <img className="w-[24px] h-[24px]" src={menuicon1} />
-                                <h3 className="block leading-[24px] text-[14px] font-[Inter] font-semibold text-gray-400">
-                                    <Link to={`/${item.toLowerCase()}`}>{item}</Link>
-                                </h3>
-                            </li>)
-                        } */}
+                        </li> */}
                     </ul>
                 </div>
             </div>

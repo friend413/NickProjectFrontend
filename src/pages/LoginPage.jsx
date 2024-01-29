@@ -2,7 +2,6 @@ import axios from "axios";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { useSelector } from "react-redux";
 import { setUserInfo } from "../utilis/redux/mainReducer";
 
 import backimg from "../assets/background.png";
@@ -16,7 +15,7 @@ const Page = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [hint, setHint] = useState('')
-    const reduxStore = useSelector((state) => state.main)
+    
 
     const onSubmit = (e) => {
         e.preventDefault();
@@ -75,7 +74,7 @@ const Page = () => {
                                 <h3 className="block font-[Inter] text-[14px] font-medium leading-[24px] text-[#344054]">Remember Me</h3>
                             </div>
                         </div>
-                        <button className="w-[100%] py-[18px] px-[24px] bg-[#6366F1] text-white shadow-md font-[Inter] rounded-[12px]" onClick={(e) => onSubmit(e)}>Login</button>
+                        <button className="w-[100%] py-[18px] px-[24px] bg-[#6366F1] text-white shadow-md font-[Inter] rounded-[12px] outline-gray-600" onClick={(e) => onSubmit(e)}>Login</button>
                     </form>
                 </div>
             </div>

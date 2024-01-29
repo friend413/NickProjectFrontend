@@ -10,11 +10,20 @@ export const mainSlice = createSlice({
   reducers: {
     setUserInfo: (state, action) => {
       state.user = action.payload
+    },
+    setDataList: (state, action) => {
+      state.dataList = action.payload
+    },
+    addDataToList: (state, action) => {
+      state.dataList.push(action.payload)
+    },
+    setCategory: (state, action) => {
+      state.category = action.payload
     }
   },
 })
 
 // Action creators are generated for each case reducer function
-export const { setUserInfo } = mainSlice.actions
+export const { setUserInfo, setDataList, addDataToList, setCategory } = mainSlice.actions
 
 export default mainSlice.reducer

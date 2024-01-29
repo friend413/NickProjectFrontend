@@ -2,3 +2,31 @@
 @tailwind components;
 @tailwind utilities;
 
+select {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    text-indent: 1px;
+    text-overflow: '';
+  }
+
+/* Style the down arrow */
+select::after {
+    content: '▼A'; /* Unicode character for down arrow */
+    position: absolute;
+    color: black;
+    top: 50%;
+    right:  8px;
+    transform: translateY(-50%);
+}
+::-webkit-scrollbar {
+    width: 2px; /* Set the width of the scrollbar */
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: #888; /* Set the color of the scrollbar thumb */
+}
+
+::-webkit-scrollbar-track {
+    background-color: #eee; /* Set the color of the scrollbar track */
+}
